@@ -1,0 +1,15 @@
+#admin-menu .admin-menu-icon {
+	height: 16px !important;
+}
+
+#admin-menu .admin-menu-tab a.active {
+	text-decoration: underline;
+}
+
+#admin-menu .admin-menu-tab .dropdown li ul {
+	display: none!important;
+}
+
+#admin-menu .admin-menu-tab .dropdown li:hover ul {
+	display: block;
+}

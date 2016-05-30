@@ -1,0 +1,7 @@
+name = Administration menu Hook
+description = "Hook the normal behavior of Administration Menu' tabs tweak"
+package = Sekkei Studio
+core = 7.x
+dependencies[] = system (>7.10)
+version = "1.1"
+

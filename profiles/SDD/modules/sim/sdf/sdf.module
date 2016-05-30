@@ -1,0 +1,80 @@
+<?php
+
+// Have to do this, because sdf.module is loaded before sim.module
+// PHP included path is not ready yet here.
+$path = drupal_get_path('module', 'sdf');
+require_once $path . '/classes/hooks/base/SDFHook.php';
+
+function sdf_init() {
+    require_once 'classes/hooks/core/SDFHookInit.php';
+    $hook = new SDFHookInit();
+    $hook->invoke();
+}
+
+function sdf_menu() {
+    require_once 'sdf/classes/hooks/core/SDFHookMenu.php';
+    $hook = new SDFHookMenu();
+    return $hook->invoke();
+}
+
+function sdf_admin_paths_alter(&$paths) {
+    require_once 'sdf/classes/hooks/core/SDFHookAdminPathAlter.php';
+    $hook = new SDFHookAdminPathAlter($paths);
+    return $hook->invoke();
+}
+
+// Examples for hooks with op/id
+
+/* function sdf_block_info() {
+    require_once 'sdf/classes/hooks/core/SDFHookBlockInfo.php';
+    $hook = new SDFHookBlockInfo();
+    return $hook->invoke();
+} */
+
+/* function sdf_block_view($delta) {
+    $factory = SDFFactoryManager::getHookBlockFactory();
+    $block = $factory->createBlock($delta, 'view');
+    return $block->invoke();
+} */
+
+/* function sdf_block_save($delta, $edit) {
+    $factory = SDFFactoryManager::getHookBlockFactory();
+    $block = $factory->createBlock($delta, 'save', $edit);
+    return $block->invoke();
+} */
+
+/* function sdf_block_configure($delta) {
+    $factory = SDFFactoryManager::getHookBlockFactory();
+    $block = $factory->createBlock($delta, 'configure');
+    return $block->invoke();
+} */
+
+/* function sdf_node_insert($node) {
+    $factory = SDFFactoryManager::getHookEntityOpFactory('node', 'insert');
+    $op = $factory->createOp('insert', $node);
+    $op->invoke();
+} */
+
+/* function sdf_node_view($node, $mode, $langcode) {
+    $factory = SDFFactoryManager::getHookEntityOpFactory('node', 'view');
+    $op = $factory->createOp('view', $node, $mode, $langcode);
+    $op->invoke();
+} */
+
+/* function sdf_taxonomy_term_view($node, $mode, $langcode) {
+    $factory = SDFFactoryManager::getHookEntityOpFactory('term', 'view');
+    $op = $factory->createOp('view', $node, $mode, $langcode);
+    $op->invoke();
+} */
+
+/* function sdf_user_view($node, $mode, $langcode) {
+    $factory = SDFFactoryManager::getHookEntityOpFactory('user', 'view');
+    $op = $factory->createOp('view', $node, $mode, $langcode);
+    $op->invoke();
+} */
+
+/* function sdf_form_alter(&$form, $formState, $formId) {
+    $factory = SDFFactoryManager::getHookFormFactory();
+    $formalter = $factory->createForm($form, $formState, $formId);
+    $formalter->invoke();
+} */

@@ -1,0 +1,4 @@
+name = Sekkei Menu Info
+description = Add extra information next to each menu item on the backend
+core = 7.x
+package = Sekkei Studio

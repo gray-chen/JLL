@@ -1,0 +1,6 @@
+name = Sekkei Internationalization Redirect
+description = Handle node that not member of the current language selection to be redirected to their language.
+core = 7.x
+package = Sekkei Studio
+dependencies[] = i18n
+

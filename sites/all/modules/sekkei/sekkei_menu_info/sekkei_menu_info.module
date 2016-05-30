@@ -1,0 +1,30 @@
+<?php
+  function sekkei_menu_info_form_alter(&$form, &$form_state, $form_id) {
+    if ($form_id == "menu_overview_form") {
+      foreach ($form as $key => $value) {
+        if (strpos($key, "mlid") === 0) {
+          if (isset($form[$key]['#item']['language'])) {
+            if ($form[$key]['#item']['language'] != "und") {
+              $form[$key]['title']['#markup'] .= " <span style='color:darkblue;'>(".$form[$key]['#item']['language'].")</span>"; 
+            } else {
+              $form[$key]['title']['#markup'] .= " <span style='color:darkblue;'>(neutral)</span>"; 
+            }
+            if ($form[$key]['#item']['link_path'] != "") {
+              $url = $form[$key]['#item']['link_path'] ;
+              if (strlen($url) > 40) {
+                $url = substr($url, 0, 40);
+                $url .= "...";
+              } 
+              $url = htmlspecialchars($url);
+              $form[$key]['title']['#markup'] .= " <span style='color:darkred;'>(".$url.")</span>"; 
+            } else {
+              $form[$key]['title']['#markup'] .= " <span style='color:darkred;'>(no link)</span>"; 
+            }
+          }
+        }
+      }
+    }
+  }
+
+  
+ ?>

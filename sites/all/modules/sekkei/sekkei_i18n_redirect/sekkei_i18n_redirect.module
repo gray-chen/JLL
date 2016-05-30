@@ -1,0 +1,24 @@
+<?php
+  function sekkei_i18n_redirect_preprocess_page (&$vars, $hook) {
+    global $user, $language, $drupal_path;
+
+    if (!isset($vars["node"])) {
+      return;
+    }
+    
+    $path = current_path(); // current path
+    $destination = drupal_get_destination(); // destination query string
+    $context_language = i18n_language_context(); // get the language of the context (node)
+
+    // Is current language different from the language of the context (node)?
+    if ($language->language != $context_language->language) {
+      unset($_GET['destination']); // remove the destination query from $_GET so drupal_goto works as expected
+      $language = $context_language; // Change language
+      drupal_goto($path, array('language' => $context_language), 301); // Goto same path with different language
+    }
+
+    if (request_path() && (request_path() != $language->prefix) && ("/".request_path() != url($path)) && url($path) != "/search404" && strpos(url($path), "search/") == false ) {
+      unset($_GET['destination']); // remove the destination query from $_GET so drupal_goto works as expected
+      drupal_goto($path, array(), 301); // Goto same path with different language
+    }
+  }

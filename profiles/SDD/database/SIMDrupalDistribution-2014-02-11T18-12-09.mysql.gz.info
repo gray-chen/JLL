@@ -1,0 +1,8 @@
+filename = "SIMDrupalDistribution-2014-02-11T18-12-09"
+description = ""
+datestamp = "1392113529"
+generator = "Backup and Migrate (http://drupal.org/project/backup_migrate)"
+generatorversion = "7.x-2.x"
+sites[0][version] = "7.26"
+sites[0][name] = "SIM Drupal Distribution"
+sites[0][url] = "http://localhost/SDD/"

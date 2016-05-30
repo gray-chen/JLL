@@ -1,0 +1,17 @@
+<?php
+
+function sekkei_admin_menu_hook_tabs_preprocess_page(&$variables) {
+	global $theme;
+	$admin_theme = variable_get('admin_theme','seven');
+	drupal_add_js(array('sekkei_admin_menu_hook_tabs' => array("isBackend" => $admin_theme == $theme)), 'setting');
+    drupal_add_js(drupal_get_path('module', 'sekkei_admin_menu_hook_tabs') . '/sekkei_admin_menu_hook_tabs.js');
+    drupal_add_css(drupal_get_path('module', 'sekkei_admin_menu_hook_tabs') . '/sekkei_admin_menu_hook_tabs.css');
+}
+
+function sekkei_admin_menu_hook_tabs_install() {
+	variable_set("admin_menu_tweak_tabs", 1);
+    db_update('system')
+        ->fields(array('weight' => 999))
+        ->condition('name', 'sekkei_admin_menu_hook_tabs', '=')
+        ->execute();
+}
